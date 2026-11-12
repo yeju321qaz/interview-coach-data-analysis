@@ -1,0 +1,114 @@
+{
+  "checks": [
+    {
+      "scheme": "light",
+      "title": "실시간 알림 정책 · 추가 분석",
+      "width": 1440,
+      "viewport": 1440,
+      "tables": 7,
+      "images": [
+        {
+          "src": "01_segment_cdf.png",
+          "loaded": true
+        },
+        {
+          "src": "02_wait_windows.png",
+          "loaded": true
+        },
+        {
+          "src": "03_relevance_patterns.png",
+          "loaded": true
+        },
+        {
+          "src": "04_simulated_policies.png",
+          "loaded": true
+        }
+      ],
+      "nan": false,
+      "replacementChar": false
+    },
+    {
+      "scheme": "light",
+      "title": "실시간 알림 정책 · 추가 분석",
+      "width": 390,
+      "viewport": 390,
+      "tables": 7,
+      "images": [
+        {
+          "src": "01_segment_cdf.png",
+          "loaded": true
+        },
+        {
+          "src": "02_wait_windows.png",
+          "loaded": true
+        },
+        {
+          "src": "03_relevance_patterns.png",
+          "loaded": true
+        },
+        {
+          "src": "04_simulated_policies.png",
+          "loaded": true
+        }
+      ],
+      "nan": false,
+      "replacementChar": false
+    },
+    {
+      "scheme": "dark",
+      "title": "실시간 알림 정책 · 추가 분석",
+      "width": 1440,
+      "viewport": 1440,
+      "tables": 7,
+      "images": [
+        {
+          "src": "01_segment_cdf.png",
+          "loaded": true
+        },
+        {
+          "src": "02_wait_windows.png",
+          "loaded": true
+        },
+        {
+          "src": "03_relevance_patterns.png",
+          "loaded": true
+        },
+        {
+          "src": "04_simulated_policies.png",
+          "loaded": true
+        }
+      ],
+      "nan": false,
+      "replacementChar": false
+    },
+    {
+      "scheme": "dark",
+      "title": "실시간 알림 정책 · 추가 분석",
+      "width": 390,
+      "viewport": 390,
+      "tables": 7,
+      "images": [
+        {
+          "src": "01_segment_cdf.png",
+          "loaded": true
+        },
+        {
+          "src": "02_wait_windows.png",
+          "loaded": true
+        },
+        {
+          "src": "03_relevance_patterns.png",
+          "loaded": true
+        },
+        {
+          "src": "04_simulated_policies.png",
+          "loaded": true
+        }
+      ],
+      "nan": false,
+      "replacementChar": false
+    }
+  ],
+  "pageErrors": [],
+  "passed": true
+}

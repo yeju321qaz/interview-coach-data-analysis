@@ -1,0 +1,1 @@
+﻿recording_id,speaker_id,split,question_id,question_family_id,question_text,question_core_items,scenario_target,actual_scenario,source_audio_path,analysis_audio_path,original_sha256,analysis_sha256,sample_rate,n_samples,duration_s,device,environment,noise_condition,consent_record_id,transcript_version,label_version,status

@@ -1,0 +1,649 @@
+<!-- presentation-refinement-v1 -->
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>재현 검증·수집 계획 | 면접코치</title><style>
+/* Layout: 팀 기획서와 같은 차콜+주홍 정체성. 좌측 목차 고정 + 본문 단일 컬럼(70ch), 섹션마다 '발견 → 기획 반영' 순서 */
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --ink: #1d1f23;
+  --ink-2: #545861;
+  --ink-3: #8a8e96;
+  --line: #e4e2dd;
+  --accent: #e84b2c;
+  --accent-soft: #fdebe6;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --band: #d6e4f6;
+  --warn: #b26a00;
+  --warn-soft: #fff4e0;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17181b; --surface: #1f2125; --ink: #eceae6; --ink-2: #b8b9bd; --ink-3: #85878d;
+    --line: #34363b; --accent: #f06a4c; --accent-soft: #3a221c;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+    --band: #23364f; --warn: #e3a64a; --warn-soft: #33281a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17181b; --surface: #1f2125; --ink: #eceae6; --ink-2: #b8b9bd; --ink-3: #85878d;
+  --line: #34363b; --accent: #f06a4c; --accent-soft: #3a221c;
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+  --band: #23364f; --warn: #e3a64a; --warn-soft: #33281a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.7; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 56px; }
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; font-size: 13.5px; }
+nav.toc .label { font-size: 11.5px; letter-spacing: .08em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+nav.toc ol { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 4px; }
+nav.toc a { color: var(--ink-2); text-decoration: none; display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); }
+nav.toc a:hover, nav.toc a:focus-visible { color: var(--ink); border-left-color: var(--accent); outline: none; }
+main { min-width: 0; }
+header.hero { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.eyebrow { font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); }
+h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.25; margin: 10px 0 14px; font-weight: 700; text-wrap: balance; letter-spacing: -0.01em; }
+h1 em { font-style: normal; color: var(--accent); }
+.lede { color: var(--ink-2); max-width: 62ch; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 18px; font-size: 13px; color: var(--ink-3); }
+.meta b { color: var(--ink-2); font-weight: 600; }
+section { padding-top: 48px; }
+section > h2 { font-size: 24px; line-height: 1.35; margin: 0 0 6px; text-wrap: balance; }
+.sec-tag { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+h3 { font-size: 17.5px; margin: 32px 0 8px; }
+p { max-width: 70ch; margin: 10px 0; }
+.muted { color: var(--ink-2); }
+.small { font-size: 13.5px; color: var(--ink-3); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* 핵심 결론 */
+.findings { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.findings li { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.findings .n { font-family: var(--font-mono); color: var(--accent); font-weight: 500; }
+.findings .what { font-weight: 600; }
+.findings .so { color: var(--ink-2); font-size: 15px; }
+.findings .so::before { content: "→ "; color: var(--accent); }
+
+/* 표 */
+.tbl { overflow-x: auto; margin: 14px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 13px; white-space: nowrap; }
+td.r, th.r { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+tr.hl td { background: var(--accent-soft); }
+
+/* 반영/주의 블록 */
+.apply { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 14px 18px; margin: 18px 0; max-width: 74ch; }
+.apply .t { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+.apply ul { margin: 6px 0 0; padding-left: 18px; }
+.apply li { margin: 4px 0; }
+.caution { background: var(--warn-soft); border-radius: 4px; padding: 12px 16px; margin: 16px 0; max-width: 74ch; font-size: 15px; }
+.caution b { color: var(--warn); }
+
+/* 차트 */
+figure.chart { margin: 20px 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 18px 12px; max-width: 760px; }
+figure.chart figcaption { font-weight: 600; font-size: 15px; }
+figure.chart .sub { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+.chart-body { margin-top: 12px; overflow-x: auto; }
+.chart-body svg { display: block; width: 100%; height: auto; min-width: 440px; }
+.chart-body text { fill: var(--ink-2); font-family: var(--font-body); font-size: 12px; }
+.chart-body .val { fill: var(--ink); font-family: var(--font-mono); font-size: 12px; }
+.chart-body .grid { stroke: var(--line); stroke-width: 1; }
+.chart-body .axis { fill: var(--ink-3); font-size: 11px; font-family: var(--font-mono); }
+.hit { fill: transparent; cursor: default; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+#tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 12.5px; padding: 6px 9px; border-radius: 4px; max-width: 260px; line-height: 1.45; z-index: 10; }
+
+/* 범위 표 (기준값) */
+.range { position: relative; height: 18px; min-width: 160px; }
+.range .track { position: absolute; left: 0; right: 0; top: 8px; height: 2px; background: var(--line); }
+.range .iqr { position: absolute; top: 4px; height: 10px; background: var(--band); border-radius: 2px; }
+.range .med { position: absolute; top: 1px; width: 2px; height: 16px; background: var(--series-1); }
+
+.checklist { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 10px; max-width: 76ch; }
+.checklist li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; }
+.checklist .box { width: 16px; height: 16px; border: 1.5px solid var(--ink-3); border-radius: 3px; margin-top: 5px; }
+.checklist b { font-weight: 600; }
+code, .path { font-family: var(--font-mono); font-size: 13px; background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; word-break: break-all; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; }
+a { color: var(--accent); }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+footer ul { padding-left: 18px; }
+
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 24px 56px; padding-inline: 16px; }
+  nav.toc { position: static; }
+  nav.toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .findings li { grid-template-columns: 1.8em minmax(0, 1fr); }
+  .findings .so { grid-column: 2; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+.wrap{grid-template-columns:200px minmax(0,1fr)} main table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow:auto}main th,main td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}main pre{overflow:auto} main h2{margin-top:40px} main img{max-width:100%}@media(max-width:760px){.wrap{display:block}nav.toc{position:static;margin-bottom:24px}}</style></head><body><div class="wrap"><nav class="toc"><div class="label">VERIFIED 2026-10-29</div><p><a href="index.html#verification-20261029">기존 분석으로 돌아가기</a></p><p>원문 검수 CSV는 로컬 팀 검수용입니다.</p></nav><main><h1>기존 분석 재현 검증 보고서</h1>
+<p>검증일: 2026-10-29. 대상은 현재 로컬 프로젝트다. 기존 <code>src/</code>와 <code>outputs/</code>는 수정하지 않았다. 코드·산출물·웹사이트·기존 보고서는 <code>backup/</code>에 복사했고, <code>backup_manifest.csv</code>로 코드·산출물·웹사이트의 SHA-256을 기록했다. 원본 데이터는 대용량이므로 복사하지 않고 읽기 전용으로 사용했다. 현재 폴더는 Git 저장소가 아니어서 커밋 이력은 없다.</p>
+<h2>1. 실행 환경과 보존 방법</h2>
+<p>실행 Python: <code>C:\Users\user\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe</code> / 3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)].
+기본 <code>python</code>은 WindowsApps 경로에서 실패했고 <code>py -0p</code>는 등록된 Python이 없다고 보고했다. 별도 Python 3.12 실행 파일은 실행 가능했다. 필요한 추가 패키지는 검증 폴더의 <code>packages/</code>에만 설치했다. 예전 환경 명세가 없어 과거와 완전히 동일한 버전이라고 보장할 수 없다. 현재 버전은 <code>environment.json</code>과 <code>requirements_verified.txt</code>에 기록한다.</p>
+<table>
+<thead>
+<tr>
+<th>패키지</th>
+<th>버전</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>numpy</td>
+<td>2.3.5</td>
+</tr>
+<tr>
+<td>pandas</td>
+<td>3.0.1</td>
+</tr>
+<tr>
+<td>scipy</td>
+<td>1.18.1</td>
+</tr>
+<tr>
+<td>scikit-learn</td>
+<td>1.9.1</td>
+</tr>
+<tr>
+<td>soundfile</td>
+<td>0.14.0</td>
+</tr>
+<tr>
+<td>matplotlib</td>
+<td>3.11.2</td>
+</tr>
+</tbody></table>
+<p><code>reproduce.py</code>가 기존 모듈 import 전에 <code>common.OUT</code>을 <code>reproduced/</code>로 지정한다. 분석식은 변경하지 않았으며, 음성 병렬 작업자 수만 4개로 제한했다. 기존 스크립트를 직접 실행하면 원래 outputs를 덮어쓸 수 있으므로 반드시 래퍼로 실행한다. label_stats의 원래 동작대로 Downloads에 남아 있는 라벨 ZIP을 읽었으며, 음성은 data 폴더의 WAV를 읽었다. ZIP과 풀린 JSON의 개수는 일치하나 76,106개 개별 파일의 바이트 대조는 하지 않았다.</p>
+<h2>2. 주요 수치 검증</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>기존 보고</th>
+<th>재현/직접 점검</th>
+<th>판정</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>원본 JSON 파일</td>
+<td>76,106</td>
+<td>76106</td>
+<td>일치; ZIP 원본 항목 기준. 폴더 목록 개수도 일치</td>
+</tr>
+<tr>
+<td>엄격 JSON 파싱 성공</td>
+<td>분리 표기 없음</td>
+<td>76100</td>
+<td>나머지 5건은 strict=False, 1건은 파싱 불가</td>
+</tr>
+<tr>
+<td>실제 라벨 분석 대상</td>
+<td>76,105</td>
+<td>76105</td>
+<td>일치; 의미·전사 품질 합격 수는 아님</td>
+</tr>
+<tr>
+<td>분석 Training/Validation</td>
+<td>68,077 / 8,028</td>
+<td>68,077 / 8,028</td>
+<td>일치; 원본 Training은 68,078</td>
+</tr>
+<tr>
+<td>WAV 수·길이</td>
+<td>2,396 / 약 27.3시간</td>
+<td>2,396 / 27.253752시간</td>
+<td>일치; WAV 헤더와 음향 재실행</td>
+</tr>
+<tr>
+<td>음성 질문·답변 쌍</td>
+<td>1,198</td>
+<td>1198</td>
+<td>일치; 76,105쌍 전체 WAV 보유 아님</td>
+</tr>
+<tr>
+<td>전체 라벨 답변 길이 중앙값</td>
+<td>약 82초</td>
+<td>82.41초</td>
+<td>일치; 음성 표본은 77.52초</td>
+</tr>
+<tr>
+<td>전체 라벨 답변 길이 합</td>
+<td>약 1,698시간</td>
+<td>1697.996시간</td>
+<td>메타데이터 합; 보유 WAV 시간과 다름</td>
+</tr>
+<tr>
+<td>전체 답변 오프라인 질문 짝 구분 TF-IDF AUC</td>
+<td>0.969 / 같은 유형 0.934</td>
+<td>0.969 / 같은 유형 0.934</td>
+<td>일치; 질문 짝 구분 실험</td>
+</tr>
+<tr>
+<td>문장 단위 오프라인 질문 짝 구분 TF-IDF AUC</td>
+<td>0.766</td>
+<td>0.766</td>
+<td>일치; 실제 이탈 감지 정답·시간 평가 없음</td>
+</tr>
+<tr>
+<td>STAR 네 요소 규칙 검출</td>
+<td>9.0%</td>
+<td>851/9,464 = 8.99%</td>
+<td>선별된 경험·협업형 답변에서만 계산</td>
+</tr>
+<tr>
+<td>0.5초 침묵 분할 중앙값</td>
+<td>약 3.4초</td>
+<td>3.36초</td>
+<td>실제 스트리밍 알림 지연 아님</td>
+</tr>
+<tr>
+<td>합성 세트</td>
+<td>4유형 각 50, 총 200</td>
+<td>200</td>
+<td>원문 짜깁기 기반 자동 라벨; 정답 검수 미수행</td>
+</tr>
+</tbody></table>
+<p>전체 JSON 76,106 = 엄격 파싱 76,100 + 관대한 파싱 5 + 실패 1이다. 분석 대상 76,105 = 엄격 파싱과 관대한 파싱의 합이며 이번 실행에서 스키마 처리도 성공했다. 실패 파일은 <code>Training/ckmk_d_ict_m_n_337139</code>이다. 수치가 정상 재현되었다는 사실과 데이터가 서비스 정답으로 신뢰할 만하다는 판단을 구분한다.</p>
+<p>WAV 2,396개는 모두 16kHz·mono·16bit다. 라벨 길이와 WAV 헤더 길이의 최대 차이는 0.001000초다. 기존 ‘모두 일치’ 표현은 소수점 반올림 수준의 일치이며 엄밀한 동일값은 아니어서 웹사이트·기존 문서에 허용 오차를 명시했다. 파일명 ID 연결은 76,105행에서 일관됐지만 질문과 답변의 의미적 연결·음성과 전사 일치는 사람 청취 검수가 필요하다.</p>
+<h2>3. 저장 산출물과 재실행 산출물 비교</h2>
+<table>
+<thead>
+<tr>
+<th>산출물</th>
+<th>대조 결과</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>audio_features.csv</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>audio_summary.txt</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>coach_answers.csv</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>coach_norms.csv</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>coach_summary.txt</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>label_summary.txt</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>labels.csv</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>proposal_summary.txt</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>segments.csv</td>
+<td>수치·내용 일치(행순서/직렬화 차이)</td>
+</tr>
+<tr>
+<td>star.csv</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>synthetic_eval.jsonl</td>
+<td>바이트 일치</td>
+</tr>
+<tr>
+<td>target_norms.csv</td>
+<td>바이트 일치</td>
+</tr>
+</tbody></table>
+<p>CSV는 열/행 수와 내용을 대조했다. 바이트가 다르면 숫자 열은 절대·상대 허용 오차 각각 1e-9, 나머지는 문자열 비교했다. segments는 병렬 처리로 행 순서가 달라질 수 있어 모든 열로 정렬 후 비교한다. PNG는 버전·글꼴 영향 때문에 바이트 동일성을 통계 재현 판정으로 쓰지 않으며 재생성 여부를 확인한다. 세부 결과는 <code>comparison.json</code>에 있다.</p>
+<h2>4. 실행 범위와 비용</h2>
+<table>
+<thead>
+<tr>
+<th>단계</th>
+<th>이번 실행 소요(초)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>label_stats</td>
+<td>102.59</td>
+</tr>
+<tr>
+<td>audio_features</td>
+<td>175.31</td>
+</tr>
+<tr>
+<td>coach_features</td>
+<td>49.20</td>
+</tr>
+<tr>
+<td>proposal_analysis</td>
+<td>366.36</td>
+</tr>
+</tbody></table>
+<p>별도 원본 감사·선별 실행은 163.03초였다. 위 시간은 이 PC의 이번 실행값이고 일반적인 실행시간 보장은 아니다. 네 기존 분석의 전체 계산을 실행했으므로 핵심 단계 미실행을 표본 결과로 대체하지 않았다. 외부 STT/LLM 호출, 음성 청취 검수, 실제 이탈·STAR 정답 평가, 신규 녹음은 실행하지 않았다.</p>
+<h2>5. 방법론적 한계와 기존 주장 정정</h2>
+<ul>
+<li>TF-IDF는 전체 질문·답변으로 어휘/IDF를 맞추고 원래 짝과 무작위 짝을 비교한다. 독립 학습/평가가 아니고 실제 이탈 음성의 AUC도 아니다. 무작위 섞기에서 자기 자신이나 같은 질문이 들어갈 수 있다. 실시간 이탈 정확도 수치로 발표하면 안 된다.</li>
+<li>STAR는 경험/협업 규칙 및 과거 경험 표현으로 선별한 뒤 2문장 미만을 제외한 9,464건에 적용한다. ‘9.0%만 좋은 답변’이라고 해석할 수 없다. 키워드 위치를 문장 수로 나누고 답변 길이를 곱한 초 수는 실제 음성 시각이 아니다.</li>
+<li>침묵 임계값은 각 파일 전체의 에너지 백분위로 산정한다. 이는 미래 음성을 사용하는 오프라인 계산이어서 그대로 온라인 지연 성능으로 일반화할 수 없다. 최대 10/15초 확정과 연속 N구간 규칙은 기존 코드에서 성능 검증되지 않았다.</li>
+<li>음성은 Validation 6개 하위셋, 질문/답변 각 1,198개다. 표본 선정의 무작위 추출 근거가 없어 편의표본으로 취급한다. 34세 이하 신입 기준표도 텍스트 n=31,713, 음향 n=454로 분모가 다르다.</li>
+<li>연령·경력의 인과적 영향은 통제하지 않았다. 기존 설명의 ‘상당 부분은 연령 차이’는 인과 결론이 아니다. p값과 분포 차이는 사용자 전달력의 좋고 나쁨 정답이 아니다.</li>
+<li>기존 ‘STAR 행동 규칙 수정 전 38.5%→61.5%’는 이전 코드 버전이 없어 재현하지 못했다. 현재 규칙 검출률만 확인했다. STT별 간투사 삭제 여부·30초 입력 제약 역시 이번 실험에서 검증하지 않았다.</li>
+<li>공식 소개는 라벨 구축량 84,134건을 기재한다. 로컬 76,106건을 AI Hub 전체 구축량이라고 말하지 않는다. 차이 8,028건의 부재 원인은 이번 조사에서 확정하지 않았다. 출처: <a href="https://aihub.or.kr/aihubdata/data/view.do?dataSetSn=71592">AI Hub</a>, 2026-10-29 확인.</li>
+</ul>
+<h2>6. 재현 명령</h2>
+<p>프로젝트 루트 PowerShell에서 <code>verification_20261029/run.ps1</code>을 사용한다. 실행 환경 변경 시 <code>requirements_verified.txt</code>를 참고하되 기존 원본 분석은 직접 실행하지 않는다. 감사와 보고서 생성까지의 정확한 순서는 <code>README.md</code>에 정리했다. 검증 폴더에서 재실행하면 그 안의 생성물을 갱신하므로 사람이 입력한 검수·라벨 CSV는 먼저 별도 사본으로 보관한다.</p>
+<h2>7. 웹사이트 확인</h2>
+<p>기존 HTML·CSS·JavaScript를 유지하고 별도 검증 섹션과 상세 보고서 페이지를 추가했다. Chrome의 file URL에서 실제 렌더링을 점검했다. 기존 SVG 그래프 4개, 새 섹션 1개, 추가 이미지 로드, 상세 페이지 표 9개를 확인했고 JavaScript page error는 0개였다. 390px 모바일 화면의 document width도 390px로 전체 가로 넘침은 없었다. 데스크톱 화면을 직접 시각 확인했다. 결과와 화면은 <code>web_check.json</code> 및 <code>*_desktop.png</code>, <code>index_mobile.png</code>에 있다. 외부 공개·배포는 하지 않았다.</p>
+<table>
+<thead>
+<tr>
+<th>규칙 유형</th>
+<th>텍스트 건수</th>
+<th>전체 대비</th>
+<th>음성 연결 쌍</th>
+<th>자동 품질 통과 후보</th>
+<th>품질 검수 필요</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>자기소개</td>
+<td>7</td>
+<td>0.01%</td>
+<td>2</td>
+<td>7</td>
+<td>0</td>
+</tr>
+<tr>
+<td>지원동기/입사후포부</td>
+<td>6,329</td>
+<td>8.32%</td>
+<td>68</td>
+<td>6310</td>
+<td>19</td>
+</tr>
+<tr>
+<td>성격/장단점</td>
+<td>4,402</td>
+<td>5.78%</td>
+<td>53</td>
+<td>4393</td>
+<td>9</td>
+</tr>
+<tr>
+<td>협업/갈등</td>
+<td>11,380</td>
+<td>14.95%</td>
+<td>168</td>
+<td>11362</td>
+<td>18</td>
+</tr>
+<tr>
+<td>경험/성과</td>
+<td>11,988</td>
+<td>15.75%</td>
+<td>174</td>
+<td>11971</td>
+<td>17</td>
+</tr>
+<tr>
+<td>상황가정/대처</td>
+<td>27,210</td>
+<td>35.75%</td>
+<td>264</td>
+<td>27164</td>
+<td>46</td>
+</tr>
+<tr>
+<td>직무/전문성</td>
+<td>8,094</td>
+<td>10.64%</td>
+<td>195</td>
+<td>8070</td>
+<td>24</td>
+</tr>
+<tr>
+<td>업무태도/근무조건</td>
+<td>4,606</td>
+<td>6.05%</td>
+<td>61</td>
+<td>4600</td>
+<td>6</td>
+</tr>
+<tr>
+<td>업무방식/성향</td>
+<td>8,151</td>
+<td>10.71%</td>
+<td>114</td>
+<td>8142</td>
+<td>9</td>
+</tr>
+<tr>
+<td>시사/사회이슈</td>
+<td>4,431</td>
+<td>5.82%</td>
+<td>64</td>
+<td>4427</td>
+<td>4</td>
+</tr>
+<tr>
+<td>가치관/윤리</td>
+<td>2,045</td>
+<td>2.69%</td>
+<td>15</td>
+<td>2042</td>
+<td>3</td>
+</tr>
+<tr>
+<td>스트레스/자기관리</td>
+<td>2,848</td>
+<td>3.74%</td>
+<td>35</td>
+<td>2840</td>
+<td>8</td>
+</tr>
+</tbody></table>
+<h1>신규 녹음 수집·라벨링·평가 계획</h1>
+<p>작성 기준: 2026-10-29. 아래 수량·시간 기준은 실험 설계안이며, 측정된 서비스 성능이나 검증된 최적 임계값이 아니다. 기존 팀 기획서 원본은 현재 폴더에서 발견되지 않아, 사용자에게 전달받은 ‘60개 이상’ 조건을 기준으로 구성했다.</p>
+<h2>1. 수집 규모와 분리</h2>
+<p>권장안은 <strong>20명 × 4유형 = 80개 답변</strong>이다. 한 사람의 4유형은 같은 경험형 질문을 사용해 발화 습관 차이를 통제하되, 네 답변 모두 동일한 분할에 넣는다. 유형 순서는 참가자별로 바꾸어 순서 효과를 줄인다. 실제 자율 답변이므로 의도한 유형과 실제 발생한 유형이 다르면 실제 라벨을 기록하고, 부족한 유형을 추가 수집한다.</p>
+<table>
+<thead>
+<tr>
+<th>분할</th>
+<th align="right">화자 수</th>
+<th align="right">답변 수</th>
+<th align="right">유형당 수</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>개발·튜닝</td>
+<td align="right">8</td>
+<td align="right">32</td>
+<td align="right">8</td>
+<td>프롬프트·임계값·정규화·라벨 기준 개발</td>
+</tr>
+<tr>
+<td>검증</td>
+<td align="right">4</td>
+<td align="right">16</td>
+<td align="right">4</td>
+<td>후보 정책 선택, 실패 원인 검토</td>
+</tr>
+<tr>
+<td>최종 테스트</td>
+<td align="right">8</td>
+<td align="right">32</td>
+<td align="right">8</td>
+<td>고정된 정책의 최종 평가</td>
+</tr>
+</tbody></table>
+<p>최소 60개라면 15명 × 4유형으로 수집하고, 화자 기준 개발 6명(24개) / 검증 3명(12개) / 테스트 6명(24개)로 분리한다. 60개 전체를 평가에 쓰면서 동시에 튜닝에 쓰는 방식은 피한다. 권장안도 테스트의 지속 이탈은 8건뿐이므로 오류 한 건이 Recall 12.5%p를 바꾼다. 유형별 지표에 분자/분모와 95% Wilson 구간을 병기하고, 전체 지표의 불확실성은 화자 단위 재표집으로 살핀다. 이 규모는 초기 실행 가능성과 큰 실패 유형 점검에는 유용하지만, 일반 사용자 대상 정확도·집단별 공정성·작은 정책 차이의 통계적 우월성을 확정하기에는 부족하다.</p>
+<p>화자 ID는 P001처럼 가명으로 관리하고 동일 인물 재참여를 통제한다. <strong>질문은 문구가 아닌 의미가 같은 질문군(question_family_id) 단위로 분리한다.</strong> ‘갈등 해결 경험’과 그 바꿔 쓰기를 다른 분할에 넣지 않는다. 화자와 질문군을 연결한 그래프의 연결요소 전체를 같은 분할에 넣으며, 분할별로 별도의 질문군을 미리 배정한다. 질문군이 적어 이중 분리가 불가능하면 질문 일반화 평가는 불가능하다고 보고하고 수집을 보완한다. 제안된 20개 질문군은 실제 배정 전에 두 사람이 의미 중복을 검토해야 하며, 계획 CSV의 ID만으로 비중복이 보장되는 것은 아니다.</p>
+<p>AI Hub 라벨에는 확인한 스키마상 화자 고유 ID가 없다. 파일의 숫자 접미사를 화자 ID로 단정하지 않는다. 기존 Training/Validation 분할을 그대로 쓰더라도 화자 독립성은 확인되지 않는다. 기존 합성 200개는 이미 개발용으로 취급하며 최종 성능 수치에서 제외한다. 합성의 원본 답변과 삽입 답변까지 동일 분할에 묶어야 하나, 현재 합성 파일은 삽입 답변 ID를 보존하지 않으므로 독립 테스트로 재사용하지 않는다.</p>
+<h2>2. 유형 정의와 녹음 시나리오</h2>
+<p>공통 질문 예시(새로 작성한 질문): “팀 과제에서 의견 충돌을 해결한 경험을 본인 역할, 행동, 결과와 함께 설명해 주세요.” 질문별 핵심 요구 항목은 녹음 전에 사람이 정한다. 아래 시간은 목표 시나리오이며 정답 경계는 실제 음성을 듣고 정한다. 답변은 보통 60~120초를 목표로 하되 길이 자체를 품질 정답으로 삼지 않는다.</p>
+<table>
+<thead>
+<tr>
+<th>시나리오</th>
+<th>조작적 정의</th>
+<th>참가자 안내 예시</th>
+<th>정답에서 분리해 기록할 점</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>정상 답변</td>
+<td>질문 핵심 요구를 설명하며 필요한 배경·사례를 포함</td>
+<td>실제 경험을 상황·역할·행동·결과로 자유롭게 설명</td>
+<td>질문 단어를 쓰지 않아도 관련성 유지. 원인 설명·배경은 이탈 아님</td>
+</tr>
+<tr>
+<td>지속 이탈</td>
+<td>핵심 요구에 기여하지 않는 주제로 이동해 약 15초 이상 지속하거나 답변 끝까지 복귀하지 않음</td>
+<td>갈등 상황을 소개한 뒤, 약 30초 지점부터 취미·여행 등 무관한 이야기를 계속</td>
+<td>실제 시작·종료, 종료 시점에도 이탈 중인지, 알림 필요성을 각각 판정</td>
+</tr>
+<tr>
+<td>일시 이탈 후 복귀</td>
+<td>약 2~5초의 무관한 언급 후 원래 논지로 명확히 복귀</td>
+<td>갈등 해결 설명 도중 취미를 짧게 언급하고 “다시 돌아가면”으로 행동 설명을 계속</td>
+<td>복귀 시각을 기록. 짧더라도 실제 무관한지, 긴 배경 설명은 아닌지 검수</td>
+</tr>
+<tr>
+<td>STAR 요소 누락</td>
+<td>경험형 질문이 요구하는 S/T/A/R 중 하나 이상을 끝까지 제시하지 않음</td>
+<td>관련된 상황·역할만 설명하고 행동 또는 결과를 생략</td>
+<td>내용 관련성은 유지. 이탈 알림과 답변 종료 후 구조 피드백을 분리</td>
+</tr>
+</tbody></table>
+<p>시나리오 유형은 수집 할당용이고 정답은 두 축이다: <code>relevance_state</code>(on_topic/off_topic/uncertain)와 <code>star_presence</code>(present/absent/uncertain/not_applicable). 정상·지속이탈·일시이탈에도 STAR 누락이 동시 발생할 수 있다. 수집 유형을 근거로 라벨을 자동 부여하지 않는다. 가정형·동기형 질문은 STAR가 필수가 아니므로 <code>not_applicable</code>로 두고 핵심 요구 충족을 평가한다. 이번 80개 통제 실험은 경험형 중심이며, 다른 질문 유형과 자연 발생 이탈의 일반화는 추가 수집 과제다.</p>
+<h2>3. 파일 형식과 시간 기준</h2>
+<ul>
+<li>원본 녹음은 장치 포맷 그대로 보존한다. 분석용 사본은 WAV PCM16, mono, 16kHz로 통일하고 변환 이력을 남긴다. 원본/사본 SHA-256, sample rate, 샘플 수, 장치·환경·거리·잡음 조건을 기록한다.</li>
+<li>전사는 UTF-8 JSONL에 원발화 그대로 기록한다. 간투사, 반복, 말 끊김을 임의 삭제하지 않는다. 이름·연락처 등은 별도 비공개 원본에서 처리하고 팀 검수본에는 마스킹한다. 정제 전사와 평가용 정규화 전사를 별도 필드로 둔다.</li>
+<li>기준시각 0은 해당 답변 WAV의 첫 샘플이다. 구간은 <code>[start_s, end_s)</code>이며 마지막 구간도 녹음 길이를 넘지 않는다. <code>start_sample=round(start_s*sr)</code>와 <code>end_sample</code>도 보관한다. 미상은 빈칸 또는 null이며 0으로 채우지 않는다.</li>
+<li>이탈 시작은 처음 무관해지는 단어의 음향적 시작, 종료는 다시 핵심 요구에 기여하는 단어의 시작이다. 복귀 없이 종료하면 <code>end_s=audio_duration</code>, <code>returned=false</code>로 기록한다. 애매한 경계는 uncertainty와 경계 범위를 함께 기록한다.</li>
+<li>구간 전사에는 utterance_id, start_s, end_s, verbatim_text가 필요하다. 기존 AI Hub 문장에는 이 시간이 없으므로 문장 순서로 실제 시각을 추정해 정답화하지 않는다.</li>
+</ul>
+<h2>4. 알림 정답과 STAR 기준</h2>
+<p>알림은 <code>drift_alert</code>와 <code>star_feedback</code>로 구분한다. 정상 및 짧은 일시 이탈은 기본적으로 drift_alert 불필요, 지속 이탈은 필요 후보이며 두 라벨러가 최종 판정한다. STAR 누락만 있는 경우 실시간 이탈 알림은 불필요하고, 답변 종료 후 구조 피드백이 필요하다. 기존 합성 파일의 <code>star_missing.expected_alert=true</code>는 이 두 목적을 혼합하므로 평가할 때 재매핑하거나 별도 지표로 나눈다.</p>
+<p>초기 알림 허용창 제안은 <strong>이탈 시작 후 5초~12초</strong>다. 이는 최적값이 아닌 튜닝 시작값이며 최종 테스트를 보기 전에 검증 세트에서 고정한다. 각 이벤트에 라벨러가 <code>alert_required</code>, <code>earliest_alert_s</code>, <code>latest_alert_s</code>, 근거를 기록한다. 필요한 정보가 아직 나오지 않은 시점에는 미래 복귀를 알았다고 가정해 정답을 부여하지 않는다. 전체 답변을 본 사후 라벨과, 접두 음성만 순차 청취한 온라인 알림 판정을 구분하고 불일치는 따로 보고한다. 일시 이탈이 5초를 넘거나 애매하면 시간 규칙으로 무조건 정상화하지 않고 검수한다.</p>
+<table>
+<thead>
+<tr>
+<th>요소</th>
+<th>present 기준</th>
+<th>absent·주의 기준</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S</td>
+<td>실제 사건의 맥락·관련 인물·제약 중 질문 이해에 필요한 배경</td>
+<td>‘프로젝트’ 단어만 등장했다고 present 아님</td>
+</tr>
+<tr>
+<td>T</td>
+<td>본인의 역할·책임·달성 목표가 구체적으로 확인</td>
+<td>팀 목표만 있고 개인 역할 불명확하면 uncertain 가능</td>
+</tr>
+<tr>
+<td>A</td>
+<td>본인이 실제 취한 행동·선택·과정이 확인</td>
+<td>‘노력했다’만 있고 무엇을 했는지 없으면 충분한 행동 근거 아님</td>
+</tr>
+<tr>
+<td>R</td>
+<td>사건의 결과·변화·실패 결과·학습 중 질문에 필요한 결과 확인</td>
+<td>‘결과’ 단어만 present 아님. 수치 성과만 강제하지 않음</td>
+</tr>
+</tbody></table>
+<p>요소는 중복 구간을 허용한다. 각 요소에 evidence_start/end와 근거 전사, 확신도를 기록한다. 한 답변에서 요소가 없다는 판정은 답변 종료 후에만 확정한다. 정량 성과가 없는 경험도 결과가 있을 수 있고, 학습만 말해도 사건의 결과 요구를 충족하는지는 질문별 루브릭으로 판정한다.</p>
+<h2>5. 검수 절차</h2>
+<ol>
+<li>개발 답변 8개(유형별 2개)로 두 라벨러가 기준을 맞춘다. 이 파일은 테스트로 이동하지 않는다.</li>
+<li>모든 신규 답변을 2인이 독립 라벨링한다. 모델 예측·수집 시나리오·상대 라벨은 가린다. 라벨링 담당자는 수집자가 아닌 사람이 권장된다.</li>
+<li>관련성·알림·STAR의 범주 일치율과 Cohen κ를 보고한다. 클래스 편중과 작은 표본으로 κ가 불안정할 수 있어 원시 교차표도 함께 제공한다.</li>
+<li>경계 차이는 절대차 중앙값·p90과 구간 IoU로 보고한다. 초기 허용 경계 차이 0.5초는 운영 기준안이며 실제 파일을 보고 조정 후 고정한다.</li>
+<li>불일치는 제3자가 근거와 함께 재판정한다. 원래 두 라벨, 최종 라벨, 수정 이유·버전을 모두 보존한다. 합의 불가 파일은 ambiguous로 유지해 주평가에서 제외하고 수량과 민감도 분석을 보고한다.</li>
+<li>최종 테스트의 전사·정답·파일 해시는 담당자만 보관한다. 개발자는 튜닝 중 접근하지 않는다. 분석 코드와 임계값·프롬프트·모델 버전을 고정한 뒤 1회 평가하고, 테스트를 보고 수정했다면 이후 결과는 개발 결과로 표시한다.</li>
+</ol>
+<h2>6. 평가 지표와 실행 조건</h2>
+<table>
+<thead>
+<tr>
+<th>기능</th>
+<th>데이터 출처·정답</th>
+<th>지표</th>
+<th>현재 가능한 범위</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>질문 이탈 감지</td>
+<td>신규 시간 구간 라벨</td>
+<td>이벤트 Precision/Recall/F1, 정상·일시이탈 답변당 오알림률, 오알림/분</td>
+<td>기존 AI Hub에는 이탈 정답이 없어 최종 성능 측정 불가</td>
+</tr>
+<tr>
+<td>알림 정책</td>
+<td>신규 허용창·온라인 판정, 시스템 로그</td>
+<td>허용창 내 알림 Recall, 이탈 시작 대비 지연 p50/p90, 허용시각 대비 지연, 중복 알림 수, 놓친 이벤트 수</td>
+<td>신규 녹음 필요</td>
+</tr>
+<tr>
+<td>STAR</td>
+<td>경험형 질문의 사람 검수 S/T/A/R와 근거 구간</td>
+<td>요소별 Precision/Recall/F1, macro F1, 답변별 완전일치</td>
+<td>규칙 탐지율과 정답 정확도를 구분</td>
+</tr>
+<tr>
+<td>STT</td>
+<td>보유 WAV + 청취 검수 전사, 신규 WAV</td>
+<td>CER=(S+D+I)/N, 간투사 토큰 Recall·Precision, final 전사 지연 p50/p90, partial 수정률, 실시간율</td>
+<td>외부 API 호출·모델 다운로드는 이번 단계에서 하지 않음</td>
+</tr>
+<tr>
+<td>침묵·유창성</td>
+<td>보유 WAV, 일부 수동 발화·침묵 경계</td>
+<td>침묵 구간 F1/IoU, 속도·쉼 오차, 환경별 오차</td>
+<td>기존 음향 지표 재현과 정답 검증은 별개</td>
+</tr>
+<tr>
+<td>성장 리포트</td>
+<td>동일 화자·질문의 반복 녹음 및 사람 평가</td>
+<td>전후 지표 변화·평가자 변화 일치, 개인 내 비교</td>
+<td>현재 80개 시나리오는 연습 성장 정답이 아니므로 별도 전후 수집 필요</td>
+</tr>
+</tbody></table>
+<p>이벤트 매칭은 한 정답 이탈에 한 알림만 대응한다. <code>alert_required=true</code>이며 해당 이탈 구간 안에 첫 drift_alert가 오면 탐지 TP, 허용창 안이면 적시 TP도 별도 계산한다. 허용창 이전/이후 탐지를 숨기지 않고 조기/지연으로 분리한다. 매칭 없는 알림과 동일 이벤트의 추가 알림은 오알림/중복으로 집계한다. 알림 없는 정답 이벤트는 FN이다. 진짜 음성 이탈 탐지 성능과 의도적으로 만든 시나리오 성능을 구분해 발표한다.</p>
+<p>정책 후보는 침묵 0.5/0.7초 × 최대 확정 10/15초 × 연속 이탈 N=1/2/3의 12개 조합이다. 개발에서 탐색하고 검증에서 ‘정상·일시이탈 오알림을 줄이되 적시 Recall 유지’를 기준으로 선택한다. 최종 테스트에서는 선택한 정책 하나를 주결과로 삼고 동일 파일에 대한 정책 비교는 탐색 결과임을 명시한다. 기존 구간 길이 통계만으로 정책 성능을 주장하지 않는다. 온라인 분할은 미래 프레임을 사용하지 않고, trailing silence와 STT finalization·모델·UI 지연을 로그에 포함한다.</p>
+<p>CER 기본 정규화는 양쪽 모두 NFC·영문 소문자화·공백 및 문장부호 제거로 고정한다. 숫자·영문 발음 치환은 버전이 있는 공통 사전만 대칭 적용하며 원문 CER도 보조 보고한다. 간투사는 삭제하지 않고, 별도 수동 간투사 이벤트 라벨로 측정한다. ‘그·좀·이제’는 문맥에 따라 의미어일 수 있으므로 기존 키워드 빈도를 정답으로 쓰지 않는다. STT 지연은 음성 프레임이 실제 도착한 monotonic 시각부터 partial/final 수신시각까지 측정하며, 파일 일괄 업로드 시간과 스트리밍 지연을 혼합하지 않는다.</p>
+<h2>7. 수집 동의와 발표 운영</h2>
+<p>신규 참가자에게 목적·녹음 항목·팀 접근자·보관 기간·철회 방법·외부 API 전송 여부를 설명하고 동의를 기록한다. 보관 기간과 철회 담당자는 모집 전에 팀이 확정한다. 동의서와 실명 연락처는 음성/전사와 분리한다. 실제 회사의 비밀·타인 실명 없이 경험을 설명하도록 안내한다.</p>
+<p>AI Hub 데이터와 검수 CSV는 로컬 팀 검수 자료이며 웹사이트에는 집계와 계획만 추가한다. AI Hub 이용정책은 사업결과 출처 표기, 무단 제3자 열람·제공 제한, 국외 반출 별도 합의 등을 명시한다. 외부 STT/LLM 전송과 원문 공개의 허용 여부는 다운로드 당시 동의 내용 및 제공기관과 확인하기 전 확정하지 않는다. 이 문서는 법률 검토 결과가 아니다. 출처: <a href="https://aihub.or.kr/aihubdata/data/view.do?dataSetSn=71592">AI Hub 데이터셋</a>, <a href="https://aihub.or.kr/intrcn/guid/usagepolicy.do?currMenu=151&topMenu=105">이용정책</a>, 2026-10-29 확인.</p>
+<h2>8. 11월 6일 제출까지 권장 순서</h2>
+<ul>
+<li>10월 29~30일: 재현 결과·검수 CSV 확인, 분할·질문군·루브릭 확정.</li>
+<li>10월 31일~11월 2일: 동의 후 녹음 및 2인 전사·구간 라벨링. 부족한 유형 보충.</li>
+<li>11월 3~4일: 개발·검증에서 정책 선택. 테스트 접근을 차단하고 설정 고정.</li>
+<li>11월 5일: 테스트 평가와 실패 사례 정리. 미완료 실험은 계획으로 표시.</li>
+<li>11월 6일: 재현한 데이터 특성, 실제 수집 현황, 실행한 성능과 계획을 구분해 제출.</li>
+</ul>
+<p>실제 녹음·모델 실험은 아직 수행하지 않았다. 일정은 팀 실행을 위한 제안이며 완료 사실이 아니다.</p>
+</main></div></body></html>

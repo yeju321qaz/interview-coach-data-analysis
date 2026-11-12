@@ -1,0 +1,75 @@
+{
+  "source_files": {
+    "Training": 68078,
+    "Validation": 8028
+  },
+  "parse_statuses": {
+    "ok": 76100,
+    "ctrl": 5,
+    "broken": 1
+  },
+  "schema_success": 76105,
+  "errors": [
+    {
+      "split": "Training",
+      "id": "ckmk_d_ict_m_n_337139",
+      "stage": "JSON",
+      "reason": "broken"
+    }
+  ],
+  "split_analyzed": {
+    "Training": 68077,
+    "Validation": 8028
+  },
+  "wav_count": 2396,
+  "wav_hours": 27.25375222222222,
+  "wav_format_counts": "{(16000, 1, 2): 2396}",
+  "audio_pairs": 1198,
+  "wav_duration_max_abs_diff": 0.0009999999999994458,
+  "answer_median_seconds": 82.41,
+  "answer_hours_metadata": 1697.9956972222224,
+  "unique_questions_raw": 70430,
+  "unique_questions_normalized": 69959,
+  "id_duplicates": 0,
+  "id_link_failures": 0,
+  "question_answer_equal": 0,
+  "answer_duplicate_rows": 31,
+  "answer_duplicate_groups": 15,
+  "pair_duplicate_rows": 0,
+  "cross_split_question_groups": 87,
+  "cross_split_question_rows": 372,
+  "cross_split_answer_groups": 0,
+  "cross_split_answer_rows": 0,
+  "cross_split_pair_groups": 0,
+  "quality_status_counts": {
+    "사용 가능 후보": 75983,
+    "검수 필요": 122
+  },
+  "quality_flag_counts": {
+    "어절수불일치": 84,
+    "정규화답변중복": 31,
+    "관대한JSON파싱": 5,
+    "NFC불일치": 3
+  },
+  "star_suitability_counts": {
+    "비적합 후보": 61292,
+    "검수 필요": 7471,
+    "적합 후보": 7342
+  },
+  "rule_unclassified": 13815,
+  "rule_multilabel": 25886,
+  "manual_sample_rows": 275,
+  "manual_sample_audio": 60,
+  "synthetic_types": {
+    "normal": 50,
+    "sustained_drift": 50,
+    "temporary_drift": 50,
+    "star_missing": 50
+  },
+  "synthetic_source_reused_ids": 0,
+  "synthetic_source_splits": {
+    "Training": 182,
+    "Validation": 18
+  },
+  "elapsed_seconds": 163.03100000001723
+}

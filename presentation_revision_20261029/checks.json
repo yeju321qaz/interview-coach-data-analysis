@@ -1,0 +1,46 @@
+{
+  "status": "PASS",
+  "new_experiments": false,
+  "legacy_graph_arrays_unchanged": true,
+  "old_section_ids_preserved": true,
+  "original_css_unchanged": true,
+  "reports": [
+    {
+      "file": "report/index.html",
+      "svg": 4,
+      "mobileWidth": 390,
+      "firstSections": [
+        "integrated",
+        "sources",
+        "verification-20261029",
+        "stt-local",
+        "collection-brief"
+      ]
+    },
+    {
+      "file": "report/integrated_standalone.html",
+      "svg": 4,
+      "mobileWidth": 390,
+      "firstSections": [
+        "integrated",
+        "sources",
+        "verification-20261029",
+        "stt-local",
+        "collection-brief"
+      ]
+    },
+    {
+      "file": "public_interview_report/dist/index.html",
+      "svg": 4,
+      "mobileWidth": 390,
+      "firstSections": [
+        "integrated",
+        "sources",
+        "verification-20261029",
+        "stt-local",
+        "collection-brief"
+      ]
+    }
+  ],
+  "pageErrors": []
+}

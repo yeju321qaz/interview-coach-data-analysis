@@ -1,0 +1,11 @@
+const {chromium}=require('C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright');
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');let browser;
+(async()=>{browser=await chromium.launch({headless:true,executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe'});const live=process.argv.includes('--live'),checks=[];
+for(const scheme of ['light','dark'])for(const mobile of [false,true]){
+ const page=await browser.newPage({viewport:mobile?{width:390,height:844}:{width:1440,height:1000},colorScheme:scheme,isMobile:mobile});const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ const url=live?'https://interview-coach-data-report-2026.brainy-robin-0834.chatgpt.site/?displayfix=utf8':'https://report-encoding-test.invalid/';
+ if(!live)await page.route('https://report-encoding-test.invalid/**',r=>r.fulfill({status:200,headers:{'content-type':'text/html'},body:fs.readFileSync(path.join(__dirname,'../public_interview_report/dist/index.html'))}));
+ await page.goto(url,{waitUntil:'networkidle',timeout:60000});const state=await page.evaluate(()=>({charset:document.characterSet,title:document.title,text:document.body.innerText,width:document.documentElement.scrollWidth,viewport:window.innerWidth,color:getComputedStyle(document.body).color,background:getComputedStyle(document.body).backgroundColor}));
+ assert.equal(state.charset,'UTF-8');assert.ok(state.title.includes('면접코치'));assert.ok(state.text.includes('데이터 확보'));assert.ok(state.text.includes('실제 tiny STT 시험'));assert.ok(!state.text.includes('\uFFFD'));assert.equal(await page.locator('svg').count(),4);if(mobile)assert.equal(state.width,390);assert.equal(errors.length,0);
+ await page.screenshot({path:path.join(__dirname,`${live?'live_fixed':'http_test'}_${scheme}_${mobile?'mobile':'desktop'}.png`)});delete state.text;checks.push({scheme,mobile,...state,pageErrors:errors});await page.close();}
+await browser.close();fs.writeFileSync(path.join(__dirname,live?'live_fixed_checks.json':'http_encoding_checks.json'),JSON.stringify({status:'PASS',live,checks},null,2));console.log(JSON.stringify({status:'PASS',live,checks},null,2));})().catch(async e=>{console.error(e);await browser?.close();process.exitCode=1});

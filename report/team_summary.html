@@ -1,0 +1,157 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>면접코치 데이터 분석</title><style>
+/* Layout: 팀 기획서와 같은 차콜+주홍 정체성. 좌측 목차 고정 + 본문 단일 컬럼(70ch), 섹션마다 '발견 → 기획 반영' 순서 */
+:root {
+  --bg: #fbfaf8;
+  --surface: #ffffff;
+  --ink: #1d1f23;
+  --ink-2: #545861;
+  --ink-3: #8a8e96;
+  --line: #e4e2dd;
+  --accent: #e84b2c;
+  --accent-soft: #fdebe6;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --band: #d6e4f6;
+  --warn: #b26a00;
+  --warn-soft: #fff4e0;
+  --font-body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17181b; --surface: #1f2125; --ink: #eceae6; --ink-2: #b8b9bd; --ink-3: #85878d;
+    --line: #34363b; --accent: #f06a4c; --accent-soft: #3a221c;
+    --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+    --band: #23364f; --warn: #e3a64a; --warn-soft: #33281a; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17181b; --surface: #1f2125; --ink: #eceae6; --ink-2: #b8b9bd; --ink-3: #85878d;
+  --line: #34363b; --accent: #f06a4c; --accent-soft: #3a221c;
+  --series-1: #3987e5; --series-2: #d95926; --series-3: #199e70; --series-4: #c98500;
+  --band: #23364f; --warn: #e3a64a; --warn-soft: #33281a; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.7; }
+.wrap { max-width: 1120px; margin: 0 auto; padding-inline: 20px; padding-block: 40px 80px; display: grid; grid-template-columns: 200px minmax(0, 1fr); gap: 56px; }
+nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 24px); align-self: start; font-size: 13.5px; }
+nav.toc .label { font-size: 11.5px; letter-spacing: .08em; color: var(--accent); font-weight: 700; text-transform: uppercase; }
+nav.toc ol { list-style: none; padding: 0; margin: 10px 0 0; display: grid; gap: 4px; }
+nav.toc a { color: var(--ink-2); text-decoration: none; display: block; padding: 3px 0 3px 10px; border-left: 2px solid var(--line); }
+nav.toc a:hover, nav.toc a:focus-visible { color: var(--ink); border-left-color: var(--accent); outline: none; }
+main { min-width: 0; }
+header.hero { padding-bottom: 28px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+.eyebrow { font-size: 12.5px; letter-spacing: .06em; color: var(--ink-3); }
+h1 { font-size: clamp(30px, 5vw, 42px); line-height: 1.25; margin: 10px 0 14px; font-weight: 700; text-wrap: balance; letter-spacing: -0.01em; }
+h1 em { font-style: normal; color: var(--accent); }
+.lede { color: var(--ink-2); max-width: 62ch; margin: 0; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 18px; font-size: 13px; color: var(--ink-3); }
+.meta b { color: var(--ink-2); font-weight: 600; }
+section { padding-top: 48px; }
+section > h2 { font-size: 24px; line-height: 1.35; margin: 0 0 6px; text-wrap: balance; }
+.sec-tag { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+h3 { font-size: 17.5px; margin: 32px 0 8px; }
+p { max-width: 70ch; margin: 10px 0; }
+.muted { color: var(--ink-2); }
+.small { font-size: 13.5px; color: var(--ink-3); }
+.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+/* 핵심 결론 */
+.findings { list-style: none; padding: 0; margin: 20px 0 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+.findings li { display: grid; grid-template-columns: 2.2em minmax(0, 1fr) minmax(0, 1fr); gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.findings .n { font-family: var(--font-mono); color: var(--accent); font-weight: 500; }
+.findings .what { font-weight: 600; }
+.findings .so { color: var(--ink-2); font-size: 15px; }
+.findings .so::before { content: "→ "; color: var(--accent); }
+
+/* 표 */
+.tbl { overflow-x: auto; margin: 14px 0; }
+table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+th, td { text-align: left; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--ink-2); font-size: 13px; white-space: nowrap; }
+td.r, th.r { text-align: right; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+tr.hl td { background: var(--accent-soft); }
+
+/* 반영/주의 블록 */
+.apply { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; padding: 14px 18px; margin: 18px 0; max-width: 74ch; }
+.apply .t { font-size: 12.5px; font-weight: 700; color: var(--accent); letter-spacing: .04em; }
+.apply ul { margin: 6px 0 0; padding-left: 18px; }
+.apply li { margin: 4px 0; }
+.caution { background: var(--warn-soft); border-radius: 4px; padding: 12px 16px; margin: 16px 0; max-width: 74ch; font-size: 15px; }
+.caution b { color: var(--warn); }
+
+/* 차트 */
+figure.chart { margin: 20px 0; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 18px 18px 12px; max-width: 760px; }
+figure.chart figcaption { font-weight: 600; font-size: 15px; }
+figure.chart .sub { font-size: 13px; color: var(--ink-3); margin-top: 2px; }
+.chart-body { margin-top: 12px; overflow-x: auto; }
+.chart-body svg { display: block; width: 100%; height: auto; min-width: 440px; }
+.chart-body text { fill: var(--ink-2); font-family: var(--font-body); font-size: 12px; }
+.chart-body .val { fill: var(--ink); font-family: var(--font-mono); font-size: 12px; }
+.chart-body .grid { stroke: var(--line); stroke-width: 1; }
+.chart-body .axis { fill: var(--ink-3); font-size: 11px; font-family: var(--font-mono); }
+.hit { fill: transparent; cursor: default; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--ink-2); margin-top: 10px; }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+#tip { position: fixed; pointer-events: none; background: var(--ink); color: var(--bg); font-size: 12.5px; padding: 6px 9px; border-radius: 4px; max-width: 260px; line-height: 1.45; z-index: 10; }
+
+/* 범위 표 (기준값) */
+.range { position: relative; height: 18px; min-width: 160px; }
+.range .track { position: absolute; left: 0; right: 0; top: 8px; height: 2px; background: var(--line); }
+.range .iqr { position: absolute; top: 4px; height: 10px; background: var(--band); border-radius: 2px; }
+.range .med { position: absolute; top: 1px; width: 2px; height: 16px; background: var(--series-1); }
+
+.checklist { list-style: none; padding: 0; margin: 14px 0; display: grid; gap: 10px; max-width: 76ch; }
+.checklist li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 10px; }
+.checklist .box { width: 16px; height: 16px; border: 1.5px solid var(--ink-3); border-radius: 3px; margin-top: 5px; }
+.checklist b { font-weight: 600; }
+code, .path { font-family: var(--font-mono); font-size: 13px; background: var(--accent-soft); padding: 1px 5px; border-radius: 3px; word-break: break-all; }
+pre { background: var(--surface); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; overflow-x: auto; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; }
+a { color: var(--accent); }
+footer { margin-top: 56px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 13px; color: var(--ink-3); }
+footer ul { padding-left: 18px; }
+
+@media (max-width: 860px) {
+  .wrap { grid-template-columns: minmax(0, 1fr); gap: 8px; padding-block: 24px 56px; padding-inline: 16px; }
+  nav.toc { position: static; }
+  nav.toc ol { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .findings li { grid-template-columns: 1.8em minmax(0, 1fr); }
+  .findings .so { grid-column: 2; }
+}
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+</style></head><body>
+<div class="wrap"><nav class="toc" aria-label="목차"><div class="label">면접코치 데이터 분석</div><ol>
+<li><a href="#data">1. 데이터 확보 현황</a></li><li><a href="#stt">2. STT 실험 결과</a></li><li><a href="#how">3. 구현 및 검증 방식</a></li><li><a href="#plan">4. 추가 데이터 수집 계획</a></li><li><a href="#next">5. 중간발표 핵심 내용</a></li><li><a href="integrated_standalone.html">상세 통계·기존 보고서 ↗</a></li></ol></nav>
+<main><header class="hero"><div class="eyebrow">Human-AI Interaction · 중간발표</div><h1>면접코치 <em>데이터 분석</em></h1>
+<p class="lede">AI Hub 면접 데이터의 확보 현황, 분석 결과와 음성인식 시험, 추가 수집 계획을 정리했습니다.</p><div class="meta"><span><b>문서 정리</b> 2026-10-30</span><span><b>분석·실험 기준</b> 2026-10-29</span></div></header>
+
+<section id="data"><div class="sec-tag">01 · 데이터 현황</div><h2>데이터 확보 및 품질 점검</h2>
+<div class="tbl"><table><tr><th>데이터</th><th>규모</th><th>활용 목적</th></tr><tr><td>질문·답변 전사</td><td><b>76,105건</b></td><td>질문 유형·답변 특성 분석</td></tr><tr><td>실제 음성</td><td><b>1,198쌍 · 약 27.25시간</b></td><td>음성인식·말하기 특성 시험</td></tr><tr><td>자동 품질 기준 통과 후보</td><td><b>75,983건</b></td><td>목적에 맞는 추가 검수 후 활용</td></tr></table></div>
+<p>출처는 AI Hub 「채용면접 인터뷰 데이터」입니다. 기존 분석을 다시 실행해 <b>12개 결과 파일의 내용이 일치</b>하는 것을 확인했습니다.</p>
+<div class="caution"><b>해석상 유의사항</b> · 자동 품질 점검 결과이며 사람 검수는 미완료 상태입니다. 실제 음성은 전체 전사 데이터 중 일부만 확보했습니다.</div></section>
+
+<section id="stt"><div class="sec-tag">02 · 실험 결과</div><h2>STT 실험 결과</h2>
+<p>무료 로컬 음성인식 모델 <b>Whisper tiny</b>로 음성 12개, 약 14.47분을 전사했습니다. 같은 모델의 두 설정을 비교했습니다.</p>
+<div class="tbl"><table><tr><th>시험 설정</th><th>문자 오류 비율(CER)</th><th>전체 처리시간</th></tr><tr><td>설정 1</td><td>21.12%</td><td>약 82초</td></tr><tr><td>설정 2</td><td>14.30%</td><td>약 137초</td></tr></table></div>
+<p>이번 표본에서는 설정 2의 오류 비율이 낮고 시간이 더 걸렸습니다. ‘어·음’ 같은 추임새가 빠질 수 있어 유창성 분석에는 추가 확인이 필요합니다.</p>
+<p class="small">CER는 기준 전사와 비교한 문자 단위 오류 비율입니다. 사람이 검수하지 않은 AI Hub 전사 기준의 임시 결과이며, 실제 서비스의 정확도나 실시간 반응속도를 검증한 것은 아닙니다. Google·Azure 음성인식 비교는 아직 계획 단계입니다.</p></section>
+
+<section id="how"><div class="sec-tag">03 · 구현·검증</div><h2>구현 및 검증 방식</h2>
+<div class="apply"><div class="t">처리 흐름</div><p><b>면접 음성</b> → 글로 변환 → 질문의 핵심과 답변 비교 → 이탈이 지속되면 알림 → 답변 종료 후 구조·유창성 리포트</p></div>
+<p>현재는 질문과 답변의 단어 관계를 비교하는 간단한 기준선과, 판단이 불확실하면 알림을 보류하는 규칙을 시험했습니다. <b>실제 이탈을 정확히 잡는지는 아직 검증하지 않았습니다.</b></p>
+<p>질문과 다른 답변을 구분한 기존 수치를 실시간 이탈 감지 정확도로 쓰지 않습니다. STAR도 키워드로 살핀 탐색 결과이며, 사람이 확인한 답변 완성률은 아닙니다. 알림을 언제 띄울지도 검증 전 설계안입니다.</p></section>
+
+<section id="plan"><div class="sec-tag">04 · 수집 계획</div><h2>추가 데이터 수집 계획</h2>
+<p>기존 데이터에는 <b>언제 질문에서 벗어났고, 돌아왔으며, 언제 알림이 필요한지</b>에 대한 정답이 없습니다.</p>
+<div class="tbl"><table><tr><th>녹음 유형</th><th>계획</th></tr><tr><td>질문에 맞게 답하는 경우</td><td>20건</td></tr><tr><td>다른 주제로 계속 벗어나는 경우</td><td>20건</td></tr><tr><td>잠깐 벗어났다가 돌아오는 경우</td><td>20건</td></tr><tr><td>경험 답변에서 STAR 요소를 빠뜨린 경우</td><td>20건</td></tr></table></div>
+<p>총 <b>20명 × 4유형 = 80건</b>을 계획했습니다. 두 사람이 이탈·복귀·알림 시점과 STAR 근거를 표시하고, 의견이 다르면 다시 판정합니다. 개발·검증·최종 평가에 같은 사람이나 의미가 같은 질문이 섞이지 않도록 나눕니다.</p>
+<p class="small">실제 녹음은 아직 0건입니다. 연기한 이탈과 자연스럽게 생긴 이탈을 구분합니다. 최종 평가 표본은 유형별 8건이라 큰 성능 결론을 내리기에는 작습니다. 연습 후 성장은 별도 전후 녹음이 필요합니다.</p></section>
+
+<section id="next"><div class="sec-tag">05 · 발표 내용</div><h2>중간발표 핵심 내용</h2>
+<ol><li><b>데이터 확보·검증:</b> 전사·음성 규모와 품질 점검, 기존 분석 재현 결과.</li><li><b>STT 시험·구현 현황:</b> 무료 tiny 전사 시험과 간단한 질문 비교 기준선. 실제 이탈 정확도는 미검증.</li><li><b>신규 데이터 수집·평가:</b> 80건 녹음의 유형·분할·시간 라벨과 평가 방법.</li></ol>
+<p>다음 실행을 위해 참여자·질문 배정과 의미 중복, 녹음·라벨링 담당을 정해야 합니다. 48개 사람 검수는 현재 보류 상태로 유지합니다.</p>
+<p><a href="integrated_standalone.html"><b>상세 분석 보고서 · 그래프 및 통계 →</b></a></p>
+<p class="small">기존 분석 결과의 요약본입니다. 원문 음성·전사·개인별 검수 데이터는 공개하지 않습니다.</p></section>
+</main></div></body></html>

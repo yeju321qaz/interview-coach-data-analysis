@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "actual_stt_predictions": 24,
+  "audio_files": 12,
+  "micro_CER_recomputed": true,
+  "policy_state_tests": "PASS",
+  "replay_files": 12,
+  "original_src_outputs_hash_checks": 26,
+  "legacy_css_js_preserved": true,
+  "all_old_sections_preserved": true,
+  "human_review": "on_hold_0_completed",
+  "paid_api_calls": 0,
+  "remote_artifact_modified": false
+}

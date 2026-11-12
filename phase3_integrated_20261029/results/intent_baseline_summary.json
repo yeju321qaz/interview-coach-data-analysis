@@ -1,0 +1,29 @@
+{
+  "task": "Original question identity vs mismatched question from same keyword type; NOT true off-topic detection",
+  "label_source": "automatically constructed pair identity; original answers not manually quality-verified",
+  "train_answers": 2000,
+  "dev_answers": 400,
+  "test_answers": 400,
+  "train_pairs": 4000,
+  "dev_pairs": 800,
+  "test_pairs": 800,
+  "skipped_no_same_type_alternative": {
+    "train": 0,
+    "dev": 0,
+    "test": 0
+  },
+  "question_group_overlap": 0,
+  "speaker_independence": "unknown_no_speaker_id",
+  "vectorizer_fit": "Training subset only",
+  "negative_sampling": "same primary keyword type, different normalized question, same partition",
+  "threshold_selected_on_dev": 0.35,
+  "test_pair_auc": 0.91473125,
+  "test_cosine_auc": 0.9277500000000001,
+  "test_pair_precision": 0.8313817330210773,
+  "test_pair_recall": 0.8875,
+  "test_pair_f1": 0.8585247883917775,
+  "seconds": 44.83715969999321,
+  "true_drift_precision_recall": null,
+  "real_time_alert_latency": null,
+  "no_api_calls": true
+}

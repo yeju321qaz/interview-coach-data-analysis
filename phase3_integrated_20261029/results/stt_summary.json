@@ -1,0 +1,58 @@
+{
+  "summary": [
+    {
+      "model": "tiny_int8_beam1",
+      "files": 12,
+      "audio_minutes": 14.473166666666666,
+      "decode_seconds": 81.96658040006878,
+      "overall_real_time_factor": 0.09438913437518716,
+      "provisional_micro_CER": 0.21121177802944507,
+      "provisional_macro_CER": 0.2550192672025956,
+      "literal_eo_eum_candidates": 34,
+      "literal_eo_eum_aligned": 0,
+      "literal_eo_eum_alignment_ratio": 0.0
+    },
+    {
+      "model": "tiny_int8_beam5",
+      "files": 12,
+      "audio_minutes": 14.473166666666666,
+      "decode_seconds": 137.39519740000833,
+      "overall_real_time_factor": 0.158218309054697,
+      "provisional_micro_CER": 0.14297848244620612,
+      "provisional_macro_CER": 0.1404151295018573,
+      "literal_eo_eum_candidates": 34,
+      "literal_eo_eum_aligned": 0,
+      "literal_eo_eum_alignment_ratio": 0.0
+    }
+  ],
+  "scope": "Actual local inference; one tiny model with two decoding settings. AIHub reference is unreviewed. Not a model-family comparison or real-time benchmark.",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "processor": "Intel64 Family 6 Model 154 Stepping 4, GenuineIntel",
+    "device": "cpu",
+    "threads": 4,
+    "compute_type": "int8",
+    "language": "ko",
+    "temperature": 0,
+    "best_of": 1,
+    "vad_filter": false,
+    "condition_on_previous_text": true,
+    "load_seconds": 0.40150290000019595,
+    "synthetic_silence_warmup_seconds": 0.5772335999645293,
+    "audio_loading": "standard-library wave + PCM16 to float32, outside decode timing; bypass PyAV 19 metadata_errors incompatibility",
+    "configuration_order": "beam1 first on even-indexed files, beam5 first on odd-indexed files",
+    "repetitions_per_setting_per_file": 1,
+    "packages": {
+      "numpy": "2.3.5",
+      "faster-whisper": "1.2.1",
+      "ctranslate2": "4.8.4",
+      "av": "19.0.2",
+      "tokenizers": "0.23.3",
+      "onnxruntime": "1.31.1",
+      "huggingface-hub": "2.3.0"
+    },
+    "paid_api_calls": 0,
+    "audio_uploaded": false
+  }
+}

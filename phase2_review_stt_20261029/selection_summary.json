@@ -1,0 +1,33 @@
+{
+  "review_rows": 48,
+  "audio_rows": 45,
+  "quality_flag_rows": 2,
+  "assignment": {
+    "자기소개": 3,
+    "가치관/윤리": 3,
+    "스트레스/자기관리": 3,
+    "성격/장단점": 3,
+    "업무태도/근무조건": 3,
+    "시사/사회이슈": 3,
+    "업무방식/성향": 3,
+    "지원동기/입사후포부": 5,
+    "협업/갈등": 3,
+    "직무/전문성": 5,
+    "경험/성과": 5,
+    "상황가정/대처": 5,
+    "미분류": 4
+  },
+  "stt_rows": 12,
+  "stt_minutes": 14.473166666666668,
+  "stt_subset_counts": {
+    "VS_01.Management_Female_Experienced": 2,
+    "VS_01.Management_Male_Experienced": 2,
+    "VS_05.ICT_Female_New": 2,
+    "VS_06.Design_Male_New": 2,
+    "VS_07.ProductionManufacturing_Female_Experienced": 2,
+    "VS_07.ProductionManufacturing_Female_New": 2
+  },
+  "recordings_planned": 80,
+  "recordings_collected": 0,
+  "human_review_completed": 0
+}

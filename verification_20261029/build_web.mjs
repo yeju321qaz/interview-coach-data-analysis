@@ -1,0 +1,13 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {marked} from 'file:///C:/Users/user/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/marked/lib/marked.esm.js';
+const base=path.dirname(fileURLToPath(import.meta.url));
+const root=path.dirname(base);
+const original=await fs.readFile(path.join(base,'backup/report/index.html'),'utf8');
+const css=original.match(/<style>([\s\S]*?)<\/style>/)[1];
+const md=await fs.readFile(path.join(base,'web_content.md'),'utf8');
+const body=marked.parse(md);
+const content=`<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>재현 검증·수집 계획 | 면접코치</title><style>${css}\n.wrap{grid-template-columns:200px minmax(0,1fr)} main table{width:100%;border-collapse:collapse;font-size:13px;display:block;overflow:auto}main th,main td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}main pre{overflow:auto} main h2{margin-top:40px} main img{max-width:100%}@media(max-width:760px){.wrap{display:block}nav.toc{position:static;margin-bottom:24px}}</style></head><body><div class="wrap"><nav class="toc"><div class="label">VERIFIED 2026-10-29</div><p><a href="index.html#verification-20261029">기존 분석으로 돌아가기</a></p><p>원문 검수 CSV는 로컬 팀 검수용입니다.</p></nav><main>${body}</main></div></body></html>`;
+await fs.writeFile(path.join(root,'report/verification.html'),content);
+console.log('Built report/verification.html');

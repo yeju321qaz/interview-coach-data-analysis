@@ -1,0 +1,4 @@
+{"stage": "label_stats", "seconds": 102.59299999999348}
+{"stage": "audio_features", "seconds": 175.31300000002375}
+{"stage": "coach_features", "seconds": 49.20299999997951}
+{"stage": "proposal_analysis", "seconds": 366.35899999999674}

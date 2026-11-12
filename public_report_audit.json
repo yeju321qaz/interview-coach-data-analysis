@@ -1,0 +1,12 @@
+{
+  "source": "report/integrated_standalone.html",
+  "source_sha256": "36b771c96c73f3fabf715f5883838692637bdb16438f1e991feb9b4de3105262",
+  "published_files": [
+    "dist/index.html"
+  ],
+  "individual_question_table_removed": true,
+  "absolute_pc_paths_removed": true,
+  "raw_audio_transcript_csv_models_included": false,
+  "original_files_modified": false,
+  "public_html_sha256": "f7d6cb7d62005f3a5170ea56d8ee356d8ac80a78cc6e734abe74ab21fb2c86a2"
+}

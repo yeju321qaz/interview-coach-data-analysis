@@ -1,0 +1,22 @@
+{
+  "checks": [
+    {
+      "file": "index.html",
+      "existingSvgCount": 4,
+      "addedSectionCount": 1,
+      "imageLoaded": true
+    },
+    {
+      "file": "verification.html",
+      "title": "재현 검증·수집 계획 | 면접코치",
+      "tableCount": 9,
+      "h1Count": 2
+    },
+    {
+      "mobileWidth": 390,
+      "documentWidth": 390,
+      "viewportWidth": 390
+    }
+  ],
+  "pageErrors": []
+}

@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "synthetic_fixture_only": true,
+  "blank_completion_blocked": true,
+  "save_export_import_roundtrip": true,
+  "editing_invalidates_completion": true,
+  "actual_human_review_completed": 0,
+  "local_audio_duration_s": 82.3,
+  "mobile_width": 390,
+  "legacy_svg_count": 4,
+  "pageErrors": []
+}

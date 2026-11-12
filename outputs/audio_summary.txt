@@ -1,0 +1,40 @@
+분석한 wav: 2,396개, 총 27.3시간
+포맷: sr {16000: 2396}, 채널 {1: 2396}, {'PCM_16': 2396}
+하위셋별 파일 수: {'VS_07.ProductionManufacturing_Female_New': 898, 'VS_05.ICT_Female_New': 436, 'VS_06.Design_Male_New': 412, 'VS_01.Management_Male_Experienced': 340, 'VS_01.Management_Female_Experienced': 258, 'VS_07.ProductionManufacturing_Female_Experienced': 52}
+
+[질문/답변별 중앙값]
+kind              answer  question
+dur_s              77.52      9.91
+rms_dbfs          -23.91    -24.01
+active_level_db   -28.24    -28.04
+snr_est_db         48.18     99.10
+lead_sil_s          0.81      0.81
+trail_sil_s         1.03      1.12
+silence_ratio       0.27      0.34
+max_pause_s         1.20      0.47
+bandwidth_hz     7750.00   7625.00
+
+[답변: 성별 x 경력 중앙값]
+                     f0_hz  rms_dbfs  snr_est_db  silence_ratio  n_pause_gt1s
+gender experience                                                            
+FEMALE EXPERIENCED  216.22    -24.39       46.06           0.30           2.0
+       NEW          213.33    -23.50       48.04           0.22           1.0
+MALE   EXPERIENCED  126.23    -24.33       50.43           0.30           3.0
+       NEW          121.91    -25.16       47.63           0.26           1.0
+
+[주의가 필요한 파일]
+- 클리핑(샘플 0.1% 이상이 최대값): 0개
+- 음량 매우 작음(RMS < -40 dBFS): 6개, 큼(> -12 dBFS): 0개
+- RMS 음량 범위: -47.2 ~ -15.3 dBFS (편차 31.9dB)
+- 추정 SNR 20dB 미만(잡음 많음): 1개
+- 앞 무음 > 2초: 11개, 뒤 무음 > 2초: 382개
+- 3초 이상 쉼이 있는 답변: 48개 / 1198
+- DC offset |평균| > 0.01: 0개
+- 유효 대역폭 분포: {'min': 3594.0, '50%': 7672.0, 'max': 8000.0} (Nyquist 8000Hz)
+- 유효 대역폭 4kHz 미만(전화 음질/업샘플링 의심): 7개
+- 피크가 0dBFS(-0.1dB 이상) = 피크 정규화 의심: 421개 (18%)
+- 디지털 무음(값이 정확히 0) 비율 5% 이상: 질문 1198개, 답변 110개
+- 저역(<100Hz) 에너지 10% 이상(웅웅거림/험 의심): 2개
+- 라벨에 매칭된 wav: 2396/2396 (매칭 안 됨 0개)
+- wav 실제 길이 - 라벨 duration: 중앙값 0.00초, |차이|>1초 0개, 최대 0.00초
+- 질문/답변 짝이 다 있는 id: 1198개, 한쪽만 있는 id: 0개

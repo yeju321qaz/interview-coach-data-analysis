@@ -1,0 +1,53 @@
+[
+  {
+    "file": "audio_features.csv",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "audio_summary.txt",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "coach_answers.csv",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "coach_norms.csv",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "coach_summary.txt",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "label_summary.txt",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "labels.csv",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "proposal_summary.txt",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "segments.csv",
+    "status": "수치·내용 일치(행순서/직렬화 차이)",
+    "rows": 48335,
+    "mismatches": {},
+    "max_abs_diff": 0.0
+  },
+  {
+    "file": "star.csv",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "synthetic_eval.jsonl",
+    "status": "바이트 일치"
+  },
+  {
+    "file": "target_norms.csv",
+    "status": "바이트 일치"
+  }
+]

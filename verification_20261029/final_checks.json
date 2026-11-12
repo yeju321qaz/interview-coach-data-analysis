@@ -1,0 +1,43 @@
+{
+  "status": "PASS",
+  "original_files_hash_unchanged": [
+    "src\\audio_features.py",
+    "src\\coach_features.py",
+    "src\\common.py",
+    "src\\extract.py",
+    "src\\label_stats.py",
+    "src\\proposal_analysis.py",
+    "src\\__pycache__\\audio_features.cpython-314.pyc",
+    "src\\__pycache__\\coach_features.cpython-314.pyc",
+    "src\\__pycache__\\common.cpython-314.pyc",
+    "outputs\\audio_features.csv",
+    "outputs\\audio_summary.txt",
+    "outputs\\coach_answers.csv",
+    "outputs\\coach_norms.csv",
+    "outputs\\coach_summary.txt",
+    "outputs\\fig_audio_overview.png",
+    "outputs\\fig_coach_overview.png",
+    "outputs\\fig_label_emotion_intent.png",
+    "outputs\\fig_label_overview.png",
+    "outputs\\fig_proposal_overview.png",
+    "outputs\\label_summary.txt",
+    "outputs\\labels.csv",
+    "outputs\\proposal_summary.txt",
+    "outputs\\segments.csv",
+    "outputs\\star.csv",
+    "outputs\\synthetic_eval.jsonl",
+    "outputs\\target_norms.csv"
+  ],
+  "authorized_modified_originals": [
+    "report\\index.html",
+    "데이터분석_보고서.md"
+  ],
+  "backup_hash_checks": 28,
+  "comparison_files": 12,
+  "manual_review_rows": 275,
+  "planned_uncollected_recordings": 80,
+  "source_outputs_preserved": true,
+  "legacy_css_js_preserved": true,
+  "web_page_errors": [],
+  "limits": "data 원본의 전후 SHA-256 전수 비교는 하지 않았음. 모든 데이터 접근 코드는 읽기 전용이며 데이터 수정 명령은 실행하지 않았음. 의미·화자·전사 정답은 미검수."
+}

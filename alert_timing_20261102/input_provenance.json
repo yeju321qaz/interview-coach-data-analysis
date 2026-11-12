@@ -1,0 +1,27 @@
+[
+  {
+    "path": "outputs/labels.csv",
+    "bytes": 121191896,
+    "sha256": "a7739fc00a09af00d9c1a1cb3980b05216e271faa226bc50716b67b3f6a5b483"
+  },
+  {
+    "path": "outputs/segments.csv",
+    "bytes": 2350776,
+    "sha256": "a40ab0e9ac202006ed35209e6ea513e2a48b52941d17289227f26f77014b60f1"
+  },
+  {
+    "path": "src/audio_features.py",
+    "bytes": 11006,
+    "sha256": "fc54a9d16991172ac1ab84d61205aa67328bb2e852ac94ce9948d8436be0fe2f"
+  },
+  {
+    "path": "src/coach_features.py",
+    "bytes": 10982,
+    "sha256": "8c87d015229ba95234fc7cd05d19aa3a3304d60c4e65841b79039166cff8eae1"
+  },
+  {
+    "path": "src/proposal_analysis.py",
+    "bytes": 19121,
+    "sha256": "731d3370d3a0f0ddc040385a7486f5da8e891e75570cd9219e70aa7915db9450"
+  }
+]

@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "live": false,
+  "checks": [
+    {
+      "scheme": "light",
+      "mobile": false,
+      "charset": "UTF-8",
+      "title": "면접코치 데이터 분석 통합 보고서",
+      "width": 1440,
+      "viewport": 1440,
+      "color": "rgb(29, 31, 35)",
+      "background": "rgb(251, 250, 248)",
+      "pageErrors": []
+    },
+    {
+      "scheme": "light",
+      "mobile": true,
+      "charset": "UTF-8",
+      "title": "면접코치 데이터 분석 통합 보고서",
+      "width": 390,
+      "viewport": 390,
+      "color": "rgb(29, 31, 35)",
+      "background": "rgb(251, 250, 248)",
+      "pageErrors": []
+    },
+    {
+      "scheme": "dark",
+      "mobile": false,
+      "charset": "UTF-8",
+      "title": "면접코치 데이터 분석 통합 보고서",
+      "width": 1440,
+      "viewport": 1440,
+      "color": "rgb(236, 234, 230)",
+      "background": "rgb(23, 24, 27)",
+      "pageErrors": []
+    },
+    {
+      "scheme": "dark",
+      "mobile": true,
+      "charset": "UTF-8",
+      "title": "면접코치 데이터 분석 통합 보고서",
+      "width": 390,
+      "viewport": 390,
+      "color": "rgb(236, 234, 230)",
+      "background": "rgb(23, 24, 27)",
+      "pageErrors": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-11-02",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "thresholds": {
+    "0.1": 0.008019002755673386,
+    "0.25": 0.017849112676729718,
+    "0.4": 0.03491146035276143
+  },
+  "audio_answers": 1198,
+  "text_answers": 76105,
+  "sentences": 480098,
+  "audio_sentences": 6751,
+  "legacy_segments_match": true,
+  "limitations": [
+    "offline adaptive energy threshold uses whole file",
+    "no gold drift labels",
+    "no sentence/audio alignment",
+    "no STT or model inference delay"
+  ],
+  "versions": {
+    "numpy": "2.3.5",
+    "pandas": "3.0.1",
+    "scipy": "1.18.1",
+    "scikit-learn": "1.9.1",
+    "soundfile": "0.14.0",
+    "matplotlib": "3.11.2"
+  }
+}

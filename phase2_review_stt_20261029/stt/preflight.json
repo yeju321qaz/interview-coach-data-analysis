@@ -1,0 +1,10 @@
+{
+  "state": "DRY_RUN_NO_MODEL_OR_API",
+  "files": 12,
+  "audio_minutes": 14.473166666666666,
+  "provider": "local",
+  "local_model_directory_exists": false,
+  "cloud_permission_required": false,
+  "estimated_google_usd_at_0_016_per_min": 0.2316,
+  "note": "Google 단가 가정에 따른 비용 예시; 실제 과금·Azure 단가는 실행 전 확인. CER/지연/간투사 성능 미측정."
+}

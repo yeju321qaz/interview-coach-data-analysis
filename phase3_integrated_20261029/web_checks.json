@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "file": "index.html",
+      "svg_count": 4,
+      "images_loaded": true,
+      "mobile_width": 390
+    },
+    {
+      "file": "integrated_standalone.html",
+      "svg_count": 4,
+      "images_loaded": true,
+      "mobile_width": 390
+    }
+  ],
+  "pageErrors": [],
+  "standalone_images_embedded": true,
+  "remote_upload": false
+}

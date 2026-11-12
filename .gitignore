@@ -1,0 +1,36 @@
+# AI Hub 원본 데이터: 재배포 금지
+data/
+
+# 원본 전사문(질문·답변 텍스트)이 들어 있는 파생 파일: 재배포 금지
+outputs/labels.csv
+outputs/coach_answers.csv
+outputs/synthetic_eval.jsonl
+**/reproduced/
+**/review/
+phase2_review_stt_20261029/ui_fixture*.*
+
+# 로컬 전용 대용량 중간 결과
+*_local.csv
+
+# 내려받은 라이브러리·모델·백업
+**/packages/
+**/models/
+**/mplconfig/
+**/backup/
+**/browser_downloads/
+*.tar.gz
+
+# 환경
+__pycache__/
+.vscode/
+*.log
+public_interview_report/
+
+# 원문 질문표·전사문 포함 (공개본은 prepare_public_report.py로 따로 생성)
+report/index.html
+report/integrated_standalone.html
+*_before.html
+phase3_integrated_20261029/results/intent_pair_predictions.csv
+phase3_integrated_20261029/results/*.jsonl
+phase3_integrated_20261029/results/*.joblib
+phase2_review_stt_20261029/stt/manifest12.csv

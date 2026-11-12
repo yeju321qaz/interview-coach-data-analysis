@@ -1,0 +1,26 @@
+{
+  "recording_id": "string; recordings.csv와 연결되는 고유키",
+  "time_intervals": "float seconds; WAV 첫 샘플 기준 [start,end); 미상 null; 0<=start<end<=duration",
+  "relevance_state": [
+    "on_topic",
+    "off_topic",
+    "uncertain"
+  ],
+  "star_presence": [
+    "present",
+    "absent",
+    "uncertain",
+    "not_applicable"
+  ],
+  "element": [
+    "S",
+    "T",
+    "A",
+    "R"
+  ],
+  "alert_required": "true/false/uncertain; STAR 구조 피드백과 이탈 알림을 분리",
+  "speaker_id": "가명; 실명 매핑은 별도 비공개 보관",
+  "test_access": "최종 평가 전 개발자에게 정답·음성 비공개; 계획표만 공유",
+  "status": "미수집/수집완료/독립라벨링/재판정/확정/제외",
+  "note": "CSV는 빈 라벨링 양식이며 입력된 정답이나 실험 결과가 아니다. PLAN 행은 수집 할당이다."
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "path": "report/index.html",
+    "preserved": true,
+    "mode": "only new section added"
+  },
+  {
+    "path": "report/integrated_standalone.html",
+    "preserved": true,
+    "mode": "only new section added"
+  },
+  {
+    "path": "public_interview_report/dist/index.html",
+    "preserved": true,
+    "mode": "only new section added"
+  },
+  {
+    "path": "public_interview_report/dist/details.html",
+    "preserved": true,
+    "mode": "only new section added"
+  },
+  {
+    "path": "데이터분석_보고서.md",
+    "preserved": true,
+    "mode": "original byte prefix preserved"
+  },
+  {
+    "path": "outputs/audio_features.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/audio_summary.txt",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/coach_answers.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/coach_norms.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/coach_summary.txt",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/fig_audio_overview.png",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/fig_coach_overview.png",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/fig_label_emotion_intent.png",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/fig_label_overview.png",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/fig_proposal_overview.png",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/labels.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/label_summary.txt",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/proposal_summary.txt",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/segments.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/star.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/synthetic_eval.jsonl",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  },
+  {
+    "path": "outputs/target_norms.csv",
+    "preserved": true,
+    "mode": "unchanged bytes"
+  }
+]

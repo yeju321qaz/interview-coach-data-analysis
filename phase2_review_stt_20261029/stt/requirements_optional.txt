@@ -1,0 +1,5 @@
+# Optional dependencies, NOT installed or API-tested in this step.
+# Install in a separate environment only after approving downloads/cloud usage.
+faster-whisper
+google-cloud-speech
+azure-cognitiveservices-speech

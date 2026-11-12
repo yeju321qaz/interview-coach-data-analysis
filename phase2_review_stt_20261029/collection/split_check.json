@@ -1,0 +1,362 @@
+{
+  "state": "ID_LEVEL_PASS",
+  "rows": 80,
+  "speaker_count": 20,
+  "planned_family_count": 20,
+  "cross_split_components": [],
+  "semantic_family_review": "PENDING_NO_SEMANTIC_MAPPING",
+  "actual_identity_verification": "PENDING",
+  "split_type_counts": [
+    {
+      "split": "development",
+      "type": "normal",
+      "n": 8
+    },
+    {
+      "split": "development",
+      "type": "star_missing",
+      "n": 8
+    },
+    {
+      "split": "development",
+      "type": "sustained_drift",
+      "n": 8
+    },
+    {
+      "split": "development",
+      "type": "temporary_drift",
+      "n": 8
+    },
+    {
+      "split": "test",
+      "type": "normal",
+      "n": 8
+    },
+    {
+      "split": "test",
+      "type": "star_missing",
+      "n": 8
+    },
+    {
+      "split": "test",
+      "type": "sustained_drift",
+      "n": 8
+    },
+    {
+      "split": "test",
+      "type": "temporary_drift",
+      "n": 8
+    },
+    {
+      "split": "validation",
+      "type": "normal",
+      "n": 4
+    },
+    {
+      "split": "validation",
+      "type": "star_missing",
+      "n": 4
+    },
+    {
+      "split": "validation",
+      "type": "sustained_drift",
+      "n": 4
+    },
+    {
+      "split": "validation",
+      "type": "temporary_drift",
+      "n": 4
+    }
+  ],
+  "position_counts": [
+    {
+      "split": "development",
+      "type": "normal",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "normal",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "normal",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "normal",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "star_missing",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "star_missing",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "star_missing",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "star_missing",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "sustained_drift",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "sustained_drift",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "sustained_drift",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "sustained_drift",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "temporary_drift",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "temporary_drift",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "temporary_drift",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "development",
+      "type": "temporary_drift",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "normal",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "normal",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "normal",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "normal",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "star_missing",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "star_missing",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "star_missing",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "star_missing",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "sustained_drift",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "sustained_drift",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "sustained_drift",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "sustained_drift",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "temporary_drift",
+      "position": "1",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "temporary_drift",
+      "position": "2",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "temporary_drift",
+      "position": "3",
+      "n": 2
+    },
+    {
+      "split": "test",
+      "type": "temporary_drift",
+      "position": "4",
+      "n": 2
+    },
+    {
+      "split": "validation",
+      "type": "normal",
+      "position": "1",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "normal",
+      "position": "2",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "normal",
+      "position": "3",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "normal",
+      "position": "4",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "star_missing",
+      "position": "1",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "star_missing",
+      "position": "2",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "star_missing",
+      "position": "3",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "star_missing",
+      "position": "4",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "sustained_drift",
+      "position": "1",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "sustained_drift",
+      "position": "2",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "sustained_drift",
+      "position": "3",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "sustained_drift",
+      "position": "4",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "temporary_drift",
+      "position": "1",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "temporary_drift",
+      "position": "2",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "temporary_drift",
+      "position": "3",
+      "n": 1
+    },
+    {
+      "split": "validation",
+      "type": "temporary_drift",
+      "position": "4",
+      "n": 1
+    }
+  ],
+  "warning": "ID-level pass does not establish semantic independence or participant identity. All 80 rows are uncollected."
+}

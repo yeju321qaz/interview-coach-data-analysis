@@ -1,0 +1,35 @@
+{
+  "status": "PASS",
+  "review_subset_rows": 48,
+  "human_review_completed": 0,
+  "stt_samples": 12,
+  "stt_model_calls": 0,
+  "model_downloads": 0,
+  "CER_algorithm_tests": 8,
+  "cloud_execution_gate": "PASS",
+  "cross_split_semantic_leak_fixture": "REJECTED_AS_EXPECTED",
+  "plan_position_balance": "PASS",
+  "preservation": [
+    {
+      "path": "report\\index.html",
+      "unchanged": false
+    },
+    {
+      "path": "report\\verification.html",
+      "unchanged": true
+    },
+    {
+      "path": "verification_20261029\\수집_라벨링_평가계획.md",
+      "unchanged": true
+    },
+    {
+      "path": "verification_20261029\\collection\\recording_plan_80.csv",
+      "unchanged": true
+    },
+    {
+      "path": "verification_20261029\\review\\manual_review.csv",
+      "unchanged": true
+    }
+  ],
+  "legacy_css_js_unchanged": true
+}

@@ -1,0 +1,1 @@
+﻿recording_id,run_id,model_version,prompt_hash,policy_id,event_type,audio_position_s,audio_frame_arrival_monotonic_ms,request_monotonic_ms,response_monotonic_ms,ui_visible_monotonic_ms,predicted_state,predicted_element,text,notes
